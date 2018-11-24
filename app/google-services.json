@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "198552291478",
+    "firebase_url": "https://wovent-212db.firebaseio.com",
+    "project_id": "wovent-212db",
+    "storage_bucket": "wovent-212db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:198552291478:android:c15d45da9a7b128c",
+        "android_client_info": {
+          "package_name": "shake.letz.wovent"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "198552291478-s71g8jhj1cceta4cbsq01d88tv07786e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCyVv1lwblM-6PQKaWR8pEtEaCGQO2C9DA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
