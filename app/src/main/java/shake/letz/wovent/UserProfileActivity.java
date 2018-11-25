@@ -1,13 +1,16 @@
 package shake.letz.wovent;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class UserProfileActivity extends AppCompatActivity {
+public class UserProfileActivity extends AppCompatActivity implements  AgregarEventoFragment.OnFragmentInteractionListener {
 
     private TextView mTextMessage;
 
@@ -16,9 +19,11 @@ public class UserProfileActivity extends AppCompatActivity {
 
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            Fragment fragment;
             switch (item.getItemId()) {
                 case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                    fragment = new AgregarEventoFragment();
+                    loadFragment(fragment);
                     return true;
                 case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
@@ -41,4 +46,15 @@ public class UserProfileActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    private  void loadFragment(Fragment fragment){
+
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.container,fragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }
