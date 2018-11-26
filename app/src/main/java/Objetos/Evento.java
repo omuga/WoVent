@@ -5,16 +5,20 @@ public class Evento {
     String descripcion;
     String fecha;
     String email;
+    String uri;
 
     public Evento(){
     }
 
-    public Evento(String nombre, String descripcion,  String fecha, String email){
+    public Evento(String nombre, String descripcion,  String fecha, String email,String uri){
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.fecha = fecha;
         this.email = email;
+        this.uri = uri;
     }
+
+    public String getUri(){return uri;}
 
     public String getNombre() {return nombre;}
 
@@ -23,6 +27,8 @@ public class Evento {
     public String getFecha() {return fecha;}
 
     public String getEmail() {return  email;}
+
+    public void setUri(String uri){this.uri = uri;}
 
     public void setNombre(String nombre) {this.nombre = nombre;}
 

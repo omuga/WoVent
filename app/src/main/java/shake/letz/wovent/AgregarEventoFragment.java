@@ -1,39 +1,49 @@
 package shake.letz.wovent;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import Objetos.Evento;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link AgregarEventoFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link AgregarEventoFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class AgregarEventoFragment extends Fragment implements View.OnClickListener{
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
+    //variables para subir imagen
+    Button btn_subir;
+    StorageReference mStorage;
+    Uri downloadUri;
+    ImageView mImageView;
+    static final int GALLERY_INTENT = 1;
+
+
     private String mParam1;
     private String mParam2;
     private DatabaseReference eventoRef;
@@ -49,15 +59,6 @@ public class AgregarEventoFragment extends Fragment implements View.OnClickListe
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment AgregarEventoFragment.
-     */
-    // TODO: Rename and change types and number of parameters
     public static AgregarEventoFragment newInstance(String param1, String param2) {
         AgregarEventoFragment fragment = new AgregarEventoFragment();
         Bundle args = new Bundle();
@@ -70,6 +71,7 @@ public class AgregarEventoFragment extends Fragment implements View.OnClickListe
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mStorage = FirebaseStorage.getInstance().getReference();
         database = FirebaseDatabase.getInstance();
         eventoRef = database.getReference("Evento");
         if (getArguments() != null) {
@@ -82,15 +84,18 @@ public class AgregarEventoFragment extends Fragment implements View.OnClickListe
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_agregar_evento, container, false);
+        btn_subir = v.findViewById(R.id.btn_subir);
+        mImageView = v.findViewById(R.id.fimg);
         et_nombre = v.findViewById(R.id.et_nombre);
         et_descripcion = v.findViewById(R.id.et_descripcion);
         et_fecha = v.findViewById(R.id.et_fecha);
         btn_agregar_evento = v.findViewById(R.id.btn_agregar_evento);
         btn_agregar_evento.setOnClickListener(this);
+        btn_subir.setOnClickListener(this);
         return v;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -118,9 +123,14 @@ public class AgregarEventoFragment extends Fragment implements View.OnClickListe
     public void onClick(View v){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         switch (v.getId()){
+            case R.id.btn_subir:
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,GALLERY_INTENT);
+                break;
             case R.id.btn_agregar_evento:
                 Evento evento = new Evento(et_nombre.getText().toString(),et_descripcion.getText().toString(),
-                        et_fecha.getText().toString(),user.getEmail());
+                        et_fecha.getText().toString(),user.getEmail(),downloadUri+"");
                 eventoRef.push().setValue(evento);
                 Toast.makeText(getContext(), "Evento Creado Satisfactoriamente", Toast.LENGTH_SHORT).show();
                 et_nombre.setText("");
@@ -128,20 +138,44 @@ public class AgregarEventoFragment extends Fragment implements View.OnClickListe
                 et_fecha.setText("");
 
         }
+    }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==GALLERY_INTENT && resultCode== Activity.RESULT_OK){
+            Uri uri = data.getData();
+            final StorageReference filePath = mStorage.child("fotos").child(uri.getLastPathSegment());
+            Toast.makeText(getContext(), "Cargando imágen,por favor espere...", Toast.LENGTH_SHORT).show();
 
-}
+            filePath.putFile(uri).continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+                @Override
+                public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                    if (!task.isSuccessful()) {
+                        throw task.getException();
+                    }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+                    // Continue with the task to get the download URL
+                    return filePath.getDownloadUrl();
+                }
+            }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+                @Override
+                public void onComplete(@NonNull Task<Uri> task) {
+                    if (task.isSuccessful()) {
+                        downloadUri = task.getResult();
+                        Log.d("EventoFragment",downloadUri+"");
+                        Glide.with(AgregarEventoFragment.this)
+                                .load(downloadUri)
+                                .into(mImageView);
+                    } else {
+                        // Handle failures
+                        // ...
+                    }
+                }
+            });
+        }
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

@@ -9,6 +9,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class UserProfileActivity extends AppCompatActivity implements  AgregarEventoFragment.OnFragmentInteractionListener, ListaEventosFragment.OnFragmentInteractionListener {
 
@@ -30,7 +31,7 @@ public class UserProfileActivity extends AppCompatActivity implements  AgregarEv
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    Toast.makeText(UserProfileActivity.this, "Falta implementar", Toast.LENGTH_SHORT).show();
                     return true;
             }
             return false;
@@ -45,6 +46,9 @@ public class UserProfileActivity extends AppCompatActivity implements  AgregarEv
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        navigation.setSelectedItemId(R.id.navigation_dashboard);
+        Fragment fragment;
+        loadFragment(new ListaEventosFragment());
     }
 
     private  void loadFragment(Fragment fragment){
