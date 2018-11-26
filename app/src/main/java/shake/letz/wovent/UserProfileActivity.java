@@ -10,7 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class UserProfileActivity extends AppCompatActivity implements  AgregarEventoFragment.OnFragmentInteractionListener {
+public class UserProfileActivity extends AppCompatActivity implements  AgregarEventoFragment.OnFragmentInteractionListener, ListaEventosFragment.OnFragmentInteractionListener {
 
     private TextView mTextMessage;
 
@@ -26,7 +26,8 @@ public class UserProfileActivity extends AppCompatActivity implements  AgregarEv
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
+                    fragment = new ListaEventosFragment();
+                    loadFragment(fragment);
                     return true;
                 case R.id.navigation_notifications:
                     mTextMessage.setText(R.string.title_notifications);

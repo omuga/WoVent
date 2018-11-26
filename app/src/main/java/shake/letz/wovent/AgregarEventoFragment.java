@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -121,6 +122,11 @@ public class AgregarEventoFragment extends Fragment implements View.OnClickListe
                 Evento evento = new Evento(et_nombre.getText().toString(),et_descripcion.getText().toString(),
                         et_fecha.getText().toString(),user.getEmail());
                 eventoRef.push().setValue(evento);
+                Toast.makeText(getContext(), "Evento Creado Satisfactoriamente", Toast.LENGTH_SHORT).show();
+                et_nombre.setText("");
+                et_descripcion.setText("");
+                et_fecha.setText("");
+
         }
 
 

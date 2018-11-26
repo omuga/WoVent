@@ -1,12 +1,30 @@
 package shake.letz.wovent;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import Objetos.Evento;
 
 
 /**
@@ -26,6 +44,10 @@ public class ListaEventosFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    View v;
+    RecyclerView rv;
+    List<Evento> eventos;
+    ListaEventosAdapter adapter;
 
     private OnFragmentInteractionListener mListener;
 
@@ -63,8 +85,45 @@ public class ListaEventosFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_lista_eventos, container, false);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null){
+            String email =  user.getEmail();
+        }
+        else{
+            Intent intent = new Intent(getContext(),MainActivity.class);
+            startActivity(intent);
+        }
+        View v = inflater.inflate(R.layout.fragment_lista_eventos, container, false);
+        rv = (RecyclerView) v.findViewById(R.id.recycler_eventos_profile);
+        rv.setHasFixedSize(true);
+        rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
+        eventos = new ArrayList<Evento>();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        adapter = new ListaEventosAdapter(eventos);
+        rv.setAdapter(adapter);
+        database.getReference("Evento").orderByChild("email").equalTo(user.getEmail()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                eventos.removeAll(eventos);
+                for ( DataSnapshot snapshot:
+                        dataSnapshot.getChildren()){
+                    try {
+                        Evento evento = snapshot.getValue(Evento.class);
+                        eventos.add(evento);
+                    } catch (Exception e){
+                        Log.e("Error","ERROR");
+                    }
+                }
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        return v;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
