@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -87,7 +88,6 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
         et_password = v.findViewById(R.id.et_password);
         btn_registro = v.findViewById(R.id.btn_registro);
         btn_registro.setOnClickListener(this);
-
         return v;
     }
 
