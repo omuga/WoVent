@@ -163,7 +163,7 @@ public class AgregarEventoFragment extends Fragment implements View.OnClickListe
                 public void onComplete(@NonNull Task<Uri> task) {
                     if (task.isSuccessful()) {
                         downloadUri = task.getResult();
-                        Log.d("EventoFragment",downloadUri+"");
+                        Log.d("EventoDelFragment",downloadUri+"");
                         Glide.with(AgregarEventoFragment.this)
                                 .load(downloadUri)
                                 .into(mImageView);

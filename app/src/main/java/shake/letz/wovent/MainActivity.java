@@ -1,6 +1,6 @@
 package shake.letz.wovent;
 
-import android.app.FragmentManager;
+import android.support.v4.app.FragmentManager;
 import android.net.Uri;
 import android.net.nsd.NsdManager;
 import android.os.Bundle;
@@ -20,7 +20,7 @@ import android.view.MenuItem;
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         InicioSesionFragment.OnFragmentInteractionListener,ListaEventosFragment.OnFragmentInteractionListener,
-        RegistroFragment.OnFragmentInteractionListener{
+        RegistroFragment.OnFragmentInteractionListener,EventosFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,10 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        Fragment fragment = new EventosFragment();
+        getSupportFragmentManager().beginTransaction().replace(R.id.Contenedor, fragment).commit();
+        navigationView.getMenu().getItem(0).setChecked(true);
     }
 
     @Override
@@ -91,7 +95,7 @@ public class MainActivity extends AppCompatActivity
         Boolean FragmentSeleccionado = false;
 
         if (id == R.id.lista_eventos) {
-            fragment = new ListaEventosFragment();
+            fragment = new EventosFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.Contenedor, fragment);
             FragmentSeleccionado = true;
         } else if (id == R.id.iniciar_sesion) {
