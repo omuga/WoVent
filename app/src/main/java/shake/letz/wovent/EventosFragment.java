@@ -1,20 +1,24 @@
 package shake.letz.wovent;
 
+import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,36 +26,27 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import Objetos.Evento;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ListaEventosFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ListaEventosFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class ListaEventosFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+public class EventosFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    View v;
-    RecyclerView rv;
-    List<Evento> eventos;
-    ListaEventosAdapter adapter;
 
     private OnFragmentInteractionListener mListener;
 
-    public ListaEventosFragment() {
+    public Context ctx;
+    DatabaseReference mDatabase;
+    RecyclerView mRecycler;
+    View view;
+    FirebaseRecyclerAdapter<Evento, EventosRecyclerViewAdapter.ViewHolder> mAdapter;
+    EditText editText;
+    public ArrayList<Evento> eventos;
+    private Activity mActivity;
+
+    public EventosFragment() {
         // Required empty public constructor
     }
 
@@ -80,50 +75,41 @@ public class ListaEventosFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mActivity = getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        if (user != null){
-            String email =  user.getEmail();
-        }
-        else{
-            Intent intent = new Intent(getContext(),MainActivity.class);
-            startActivity(intent);
-        }
-        View v = inflater.inflate(R.layout.fragment_lista_eventos, container, false);
-        rv = (RecyclerView) v.findViewById(R.id.recycler_eventos_profile);
-        rv.setHasFixedSize(true);
-        rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
-        eventos = new ArrayList<Evento>();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        adapter = new ListaEventosAdapter(eventos);
-        rv.setAdapter(adapter);
-        database.getReference("Evento").orderByChild("email").equalTo(user.getEmail()).addValueEventListener(new ValueEventListener() {
+        // Inflate the layout for this fragment
+        view = inflater.inflate(R.layout.fragment_eventos_list, container, false);
+        mRecycler = view.findViewById(R.id.list_recycler);
+        editText = (EditText)view.findViewById(R.id.search_text);
+        eventos = new ArrayList<>();
+        mDatabase = FirebaseDatabase.getInstance().getReference("Evento");
+        search("");
+
+        editText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                eventos.removeAll(eventos);
-                for ( DataSnapshot snapshot:
-                        dataSnapshot.getChildren()){
-                    try {
-                        Evento evento = snapshot.getValue(Evento.class);
-                        eventos.add(evento);
-                    } catch (Exception e){
-                        Log.e("Error","ERROR");
-                    }
-                }
-                adapter.notifyDataSetChanged();
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
 
             @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (!s.toString().isEmpty()){
+                    search(s.toString());
+                }
+                else {
+                    search("");
+                }
             }
         });
-
-        return v;
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -150,6 +136,43 @@ public class ListaEventosFragment extends Fragment {
         mListener = null;
     }
 
+
+    private void search(String s){
+        mDatabase.
+                orderByChild("nombre").
+                startAt(s).
+                endAt(s + '\uf8ff').addValueEventListener(new ValueEventListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                eventos.clear();
+                if (dataSnapshot.hasChildren()){
+                    for (DataSnapshot ds: dataSnapshot.getChildren()){
+                        final Evento t = ds.getValue(Evento.class);
+                        eventos.add(t);
+                    }
+                    EventosRecyclerViewAdapter mTadapter = new EventosRecyclerViewAdapter(eventos, getContext());
+                    mTadapter.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(getContext(), "click no implementado", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    mRecycler.setAdapter(mTadapter);
+                    mTadapter.notifyDataSetChanged();
+
+                }
+
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -164,4 +187,5 @@ public class ListaEventosFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
 }
