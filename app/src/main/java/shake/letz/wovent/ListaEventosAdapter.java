@@ -63,10 +63,9 @@ public class ListaEventosAdapter extends  RecyclerView.Adapter<ListaEventosAdapt
                     Evento event = eventos.get(pos);
                     Toast.makeText(v.getContext(), event.getNombre(), Toast.LENGTH_SHORT).show();
                     database = FirebaseDatabase.getInstance();
-                    actividadRef = database.getReference("Actividad");
-                    actividadRef.push().setValue(event.getNombre());
-
-
+                    Intent intent = new Intent(v.getContext(),AgregarActividadActivity.class);
+                    intent.putExtra("evento",event.getNombre());
+                    v.getContext().startActivity(intent);
                 }
             });
 

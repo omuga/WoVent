@@ -24,7 +24,11 @@
         </activity>
         <activity
             android:name=".UserProfileActivity"
-            android:label="@string/title_activity_user_profile"></activity>
+            android:label="@string/title_activity_user_profile"
+            android:windowSoftInputMode="adjustPan"></activity>
+        <activity
+            android:name=".AgregarActividadActivity"
+            android:label="@string/title_activity_agregar_actividad"></activity>
     </application>
 
 </manifest>
