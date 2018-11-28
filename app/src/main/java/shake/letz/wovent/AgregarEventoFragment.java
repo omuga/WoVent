@@ -50,7 +50,8 @@ public class AgregarEventoFragment extends Fragment implements View.OnClickListe
     FirebaseDatabase database;
     EditText et_nombre;
     EditText et_descripcion;
-    EditText et_fecha;
+    EditText et_fechaS;
+    EditText et_fechaE;
     Button btn_agregar_evento;
 
     private OnFragmentInteractionListener mListener;
@@ -88,7 +89,8 @@ public class AgregarEventoFragment extends Fragment implements View.OnClickListe
         mImageView = v.findViewById(R.id.fimg);
         et_nombre = v.findViewById(R.id.et_nombre);
         et_descripcion = v.findViewById(R.id.et_descripcion);
-        et_fecha = v.findViewById(R.id.et_fecha);
+        et_fechaS = v.findViewById(R.id.et_fechaS);
+        et_fechaE = v.findViewById(R.id.et_fechaE);
         btn_agregar_evento = v.findViewById(R.id.btn_agregar_evento);
         btn_agregar_evento.setOnClickListener(this);
         btn_subir.setOnClickListener(this);
@@ -130,12 +132,13 @@ public class AgregarEventoFragment extends Fragment implements View.OnClickListe
                 break;
             case R.id.btn_agregar_evento:
                 Evento evento = new Evento(et_nombre.getText().toString(),et_descripcion.getText().toString(),
-                        et_fecha.getText().toString(),user.getEmail(),downloadUri+"");
+                        et_fechaS.getText().toString(),et_fechaE.getText().toString(), user.getEmail(),downloadUri+"");
                 eventoRef.push().setValue(evento);
                 Toast.makeText(getContext(), "Evento Creado Satisfactoriamente", Toast.LENGTH_SHORT).show();
                 et_nombre.setText("");
                 et_descripcion.setText("");
-                et_fecha.setText("");
+                et_fechaS.setText("");
+                et_fechaE.setText("");
 
         }
     }

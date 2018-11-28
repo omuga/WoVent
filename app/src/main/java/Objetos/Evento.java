@@ -3,17 +3,19 @@ package Objetos;
 public class Evento {
     String nombre;
     String descripcion;
-    String fecha;
+    String fechaS;
+    String fechaE;
     String email;
     String uri;
 
     public Evento(){
     }
 
-    public Evento(String nombre, String descripcion,  String fecha, String email,String uri){
+    public Evento(String nombre, String descripcion,  String fechaS, String fechaE, String email,String uri){
         this.nombre = nombre;
         this.descripcion = descripcion;
-        this.fecha = fecha;
+        this.fechaS = fechaS;
+        this.fechaE = fechaE;
         this.email = email;
         this.uri = uri;
     }
@@ -24,7 +26,9 @@ public class Evento {
 
     public String getDescripcion() {return  descripcion;}
 
-    public String getFecha() {return fecha;}
+    public String getFechaS() {return fechaS;}
+
+    public String getFechaE() {return fechaE;}
 
     public String getEmail() {return  email;}
 
@@ -34,7 +38,9 @@ public class Evento {
 
     public void setDescripcion(String descripcion) {this.descripcion = descripcion;}
 
-    public void setFecha(String fecha) {this.fecha = fecha;}
+    public void setFechaS(String fechaS) {this.fechaS = fechaS;}
+
+    public void setFechaE(String fechaE) {this.fechaE = fechaE;}
 
     public void setEmail(String email) {this.email = email;}
 }
