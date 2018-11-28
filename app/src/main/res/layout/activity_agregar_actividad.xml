@@ -18,6 +18,37 @@
         tools:context=".AgregarTiendaProfileFragment"
         tools:ignore="UselessParent">
 
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp">
+
+            <Button
+                android:id="@+id/btn_subir_actividad"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginTop="30dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/colorAccent"
+                android:drawable="@drawable/button_shape"
+                android:gravity="center"
+                android:text="Subir Imagen"
+                android:textAllCaps="false"
+                android:textColor="#FFFF"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/fimg"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:paddingLeft="0dp"
+                android:paddingTop="10dp"
+                android:src="@drawable/ic_menu_camera" />
+        </android.support.v7.widget.CardView>
+
+
 
 
         <EditText
@@ -70,6 +101,19 @@
             android:layout_marginBottom="14dp"
             android:background="@color/colorAccent"
             android:text="Agregar Actividad"
+            android:textAllCaps="false"
+            android:textColor="#FFFF" />
+
+        <Button
+            android:id="@+id/btn_volver_actividad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="14dp"
+            android:background="@color/colorAccent"
+            android:text="Volver"
             android:textAllCaps="false"
             android:textColor="#FFFF" />
 

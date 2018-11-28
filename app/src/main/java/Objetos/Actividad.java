@@ -6,16 +6,19 @@ public class Actividad {
     String horario;
     String email;
     String evento;
+    String uri;
+
 
     public  Actividad(){
     }
 
-    public  Actividad(String nombre, String descripcion, String horario, String email, String evento){
+    public  Actividad(String nombre, String descripcion, String horario, String email, String evento,String uri){
             this.nombre = nombre;
             this.descripcion= descripcion;
             this.horario = horario;
             this.email = email;
             this.evento = evento;
+            this.uri = uri;
     }
 
     public void setNombre(String nombre){
@@ -56,5 +59,11 @@ public class Actividad {
 
     public String getEvento(){
         return  evento;
+    }
+
+    public void setUri(String uri){this.uri = uri;}
+
+    public String getUri() {
+        return uri;
     }
 }
