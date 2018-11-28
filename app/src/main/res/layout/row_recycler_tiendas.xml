@@ -93,8 +93,6 @@
         android:layout_marginTop="184dp"
         android:layout_marginBottom="0dp"
         android:background="#fff"
-        android:clickable="true"
-        android:focusable="true"
         android:padding="20dp"
         android:text="Eliminar evento"
         android:textColor="#ff00"
@@ -107,6 +105,8 @@
         android:layout_height="39dp"
         android:layout_alignStart="@+id/arrow1"
         android:layout_alignParentTop="true"
+        android:clickable="true"
+        android:focusable="true"
         android:layout_marginStart="-8dp"
         android:layout_marginTop="196dp"
         app:srcCompat="@drawable/ic_delete_btn" />
