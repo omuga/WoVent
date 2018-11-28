@@ -104,6 +104,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="-384dp"
         android:layout_marginBottom="0dp"
-        android:layout_toEndOf="@+id/desc_event"></android.support.v7.widget.RecyclerView>
+        android:layout_toEndOf="@+id/desc_event"
+        tools:listitem="@layout/fragment_lista_programa"></android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>
