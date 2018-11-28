@@ -55,11 +55,12 @@ public class ListaEventosAdapter extends  RecyclerView.Adapter<ListaEventosAdapt
     public class EventoHolder extends  RecyclerView.ViewHolder {
         TextView textViewEvento;
         ImageView eliminar_evento;
-
+        TextView textViewEditEvento;
         public EventoHolder(@NonNull View itemView) {
             super(itemView);
             textViewEvento = (TextView) itemView.findViewById(R.id.textview_tiendas);
             eliminar_evento = itemView.findViewById(R.id.trash);
+            textViewEditEvento = itemView.findViewById(R.id.edit_evento);
             textViewEvento.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -96,6 +97,18 @@ public class ListaEventosAdapter extends  RecyclerView.Adapter<ListaEventosAdapt
                     });
                 }
             }));
+            textViewEditEvento.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //DatabaseReference database_edicion = FirebaseDatabase.getInstance().getReference("Tienda");
+                    Integer pos = getAdapterPosition();
+                    //Tienda tiendap = tiendas.get(pos);
+                    //int id_tienda = tiendap.getId();
+                    Intent intent = new Intent((v.getContext()),EditarEventoActivity.class);
+                    //intent.putExtra("tienda",id_tienda);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 
