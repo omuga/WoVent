@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -48,6 +49,7 @@ public class ListaEventosFragment extends Fragment {
     RecyclerView rv;
     List<Evento> eventos;
     ListaEventosAdapter adapter;
+    ImageView eliminar_evento;
 
     private OnFragmentInteractionListener mListener;
 
@@ -94,6 +96,7 @@ public class ListaEventosFragment extends Fragment {
             startActivity(intent);
         }
         View v = inflater.inflate(R.layout.fragment_lista_eventos, container, false);
+        eliminar_evento = v.findViewById(R.id.trash);
         rv = (RecyclerView) v.findViewById(R.id.recycler_eventos_profile);
         rv.setHasFixedSize(true);
         rv.setLayoutManager(new LinearLayoutManager(this.getActivity()));
