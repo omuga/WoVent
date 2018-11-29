@@ -1,5 +1,6 @@
 package shake.letz.wovent;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -10,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 public class UserProfileActivity extends AppCompatActivity implements  AgregarEventoFragment.OnFragmentInteractionListener, ListaEventosFragment.OnFragmentInteractionListener {
 
@@ -31,7 +34,9 @@ public class UserProfileActivity extends AppCompatActivity implements  AgregarEv
                     loadFragment(fragment);
                     return true;
                 case R.id.navigation_notifications:
-                    Toast.makeText(UserProfileActivity.this, "Falta implementar", Toast.LENGTH_SHORT).show();
+                    FirebaseAuth.getInstance().signOut();
+                    Intent intent = new Intent(getBaseContext(),MainActivity.class);
+                    startActivity(intent);
                     return true;
             }
             return false;
