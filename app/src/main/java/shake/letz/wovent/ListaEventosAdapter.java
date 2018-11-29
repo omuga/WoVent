@@ -100,12 +100,19 @@ public class ListaEventosAdapter extends  RecyclerView.Adapter<ListaEventosAdapt
             textViewEditEvento.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    //DatabaseReference database_edicion = FirebaseDatabase.getInstance().getReference("Tienda");
-                    Integer pos = getAdapterPosition();
-                    //Tienda tiendap = tiendas.get(pos);
-                    //int id_tienda = tiendap.getId();
                     Intent intent = new Intent((v.getContext()),EditarEventoActivity.class);
-                    //intent.putExtra("tienda",id_tienda);
+                    Integer position = getAdapterPosition();
+                    Evento evento = eventos.get(position);
+                    String nombre = evento.getNombre();
+                    String fecha_inicio = evento.getFechaS();
+                    String fecha_termino = evento.getFechaE();
+                    String descripcion = evento.getDescripcion();
+                    String uri = evento.getUri();
+                    intent.putExtra("nombre",nombre);
+                    intent.putExtra("fechaS",fecha_inicio);
+                    intent.putExtra("fechaE",fecha_termino);
+                    intent.putExtra("uri",uri);
+                    intent.putExtra("descripcion",descripcion);
                     v.getContext().startActivity(intent);
                 }
             });
