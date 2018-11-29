@@ -56,11 +56,13 @@ public class ListaEventosAdapter extends  RecyclerView.Adapter<ListaEventosAdapt
         TextView textViewEvento;
         ImageView eliminar_evento;
         TextView textViewEditEvento;
+        TextView textViewNotificacion;
         public EventoHolder(@NonNull View itemView) {
             super(itemView);
             textViewEvento = (TextView) itemView.findViewById(R.id.textview_tiendas);
             eliminar_evento = itemView.findViewById(R.id.trash);
             textViewEditEvento = itemView.findViewById(R.id.edit_evento);
+            textViewNotificacion = itemView.findViewById(R.id.notificacion);
             textViewEvento.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -116,6 +118,16 @@ public class ListaEventosAdapter extends  RecyclerView.Adapter<ListaEventosAdapt
                     v.getContext().startActivity(intent);
                 }
             });
+            textViewNotificacion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent((v.getContext()),NotificacionActivity.class);
+                    Integer position = getAdapterPosition();
+                    v.getContext().startActivity(intent);
+                }
+            });
+
+
         }
     }
 
