@@ -2,6 +2,7 @@ package shake.letz.wovent;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -155,7 +157,18 @@ public class EventosFragment extends Fragment {
                     mTadapter.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Toast.makeText(getContext(), "click no implementado", Toast.LENGTH_SHORT).show();
+                            String uriEvento = eventos.get(mRecycler.getChildAdapterPosition(v)).getUri();
+                            String nombreEvento = eventos.get(mRecycler.getChildAdapterPosition(v)).getNombre();
+                            String fechasEvento = eventos.get(mRecycler.getChildAdapterPosition(v)).getFechaS();
+                            String fechaeEvento = eventos.get(mRecycler.getChildAdapterPosition(v)).getFechaE();
+                            String descripcionEvento = eventos.get(mRecycler.getChildAdapterPosition(v)).getDescripcion();
+                            Intent myintent = new Intent(view.getContext(),DetalleEvento.class);
+                            myintent.putExtra("keyuri",uriEvento);
+                            myintent.putExtra("keynombre",nombreEvento);
+                            myintent.putExtra("keyfechas",fechasEvento);
+                            myintent.putExtra("keyfechae",fechaeEvento);
+                            myintent.putExtra("keydescripcion",descripcionEvento);;
+                            startActivityForResult(myintent,0);
                         }
                     });
                     mRecycler.setLayoutManager(new LinearLayoutManager(getActivity()));

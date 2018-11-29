@@ -29,6 +29,7 @@
         <activity
             android:name=".AgregarActividadActivity"
             android:label="@string/title_activity_agregar_actividad" />
+        <activity android:name=".DetalleEvento"></activity>
         <activity
             android:name=".EditarEventoActivity"
             android:label="@string/title_activity_editar_evento"></activity>
