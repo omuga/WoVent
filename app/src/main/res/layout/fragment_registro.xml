@@ -34,7 +34,7 @@
                 android:layout_marginTop="0dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
-                android:background="@color/colorAccent"
+                android:background="@drawable/shape_editbox"
                 android:drawableLeft="@drawable/ic_email_black_24dp"
                 android:drawablePadding="15dp"
                 android:hint="Ingresa tu Email"
@@ -52,7 +52,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="5dp"
-                android:background="@color/colorAccent"
+                android:background="@drawable/shape_editbox"
                 android:drawableLeft="@drawable/ic_lock_black_24dp"
                 android:drawablePadding="15dp"
                 android:hint="Ingresa tu Contraseña"
@@ -71,10 +71,10 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:padding="15dp"
-                android:background="@color/colorAccent"
+                android:background="@drawable/button_selector2"
                 android:text="Registrarse"
                 android:textAllCaps="false"
-                android:textColor="#FFFF"
+                android:textColor="@color/colorAccent"
                 android:textSize="18dp" />
 
 

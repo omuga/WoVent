@@ -3,15 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
     android:orientation="horizontal">
 
     <CheckedTextView
         android:id="@+id/line_up"
         android:layout_width="wrap_content"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:background="@drawable/common_google_signin_btn_icon_light_normal_background"
         android:checkMark="@drawable/ic_notifications_active_black_24dp"
         android:checked="true"
-        android:text="CheckedTextView" />
+        android:padding="10dp"
+        android:text="Actividad" />
 </LinearLayout>

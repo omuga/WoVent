@@ -10,11 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
+import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import Objetos.Evento;
+
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,6 +26,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
+
+import static android.support.constraint.Constraints.TAG;
 
 public class ListaEventosAdapter extends  RecyclerView.Adapter<ListaEventosAdapter.EventoHolder> {
 
@@ -49,11 +54,13 @@ public class ListaEventosAdapter extends  RecyclerView.Adapter<ListaEventosAdapt
 
     public class EventoHolder extends  RecyclerView.ViewHolder {
         TextView textViewEvento;
-
+        ImageView eliminar_evento;
+        TextView textViewEditEvento;
         public EventoHolder(@NonNull View itemView) {
             super(itemView);
-
             textViewEvento = (TextView) itemView.findViewById(R.id.textview_tiendas);
+            eliminar_evento = itemView.findViewById(R.id.trash);
+            textViewEditEvento = itemView.findViewById(R.id.edit_evento);
             textViewEvento.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -68,7 +75,40 @@ public class ListaEventosAdapter extends  RecyclerView.Adapter<ListaEventosAdapt
                     v.getContext().startActivity(intent);
                 }
             });
+            eliminar_evento.setOnClickListener((new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Integer pos = getAdapterPosition();
+                    Evento evento = eventos.get(pos);
+                    DatabaseReference EventoRef = FirebaseDatabase.getInstance().getReference();
+                    Query eventQuery = EventoRef.child("Evento").orderByChild("nombre").equalTo(evento.getNombre());
+                    eventQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for (DataSnapshot eventSnapshot: dataSnapshot.getChildren()){
+                                eventSnapshot.getRef().removeValue();
+                            }
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                            Log.e(TAG, "onCancelled", databaseError.toException());
+                        }
+                    });
+                }
+            }));
+            textViewEditEvento.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //DatabaseReference database_edicion = FirebaseDatabase.getInstance().getReference("Tienda");
+                    Integer pos = getAdapterPosition();
+                    //Tienda tiendap = tiendas.get(pos);
+                    //int id_tienda = tiendap.getId();
+                    Intent intent = new Intent((v.getContext()),EditarEventoActivity.class);
+                    //intent.putExtra("tienda",id_tienda);
+                    v.getContext().startActivity(intent);
+                }
+            });
         }
     }
 
