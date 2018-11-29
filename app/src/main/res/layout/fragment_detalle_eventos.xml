@@ -24,6 +24,9 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="0dp"
         android:layout_marginBottom="-14dp"
+        android:background="@color/colorPrimary"
+        android:text="h"
+        android:textColor="@color/colorPrimary"
         tools:background="@color/colorPrimary" />
 
     <TextView
@@ -40,6 +43,17 @@
         android:textAlignment="center"
         android:textColor="#ffffff"
         tools:textAlignment="center" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="3dp"
+        android:layout_height="39dp"
+        android:layout_alignStart="@+id/end_date"
+        android:layout_alignTop="@+id/image_event"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="196dp"
+        android:background="?android:attr/listDivider"
+        tools:background="@color/colorPrimaryDark" />
 
     <TextView
         android:id="@+id/start_date"
@@ -78,7 +92,8 @@
         android:layout_marginStart="81dp"
         android:layout_marginBottom="2dp"
         android:text="Inicia"
-        android:textColor="@color/common_google_signin_btn_text_light_default" />
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/fin"
@@ -86,10 +101,11 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/start_date"
         android:layout_alignParentStart="true"
-        android:layout_marginStart="283dp"
-        android:layout_marginBottom="2dp"
+        android:layout_marginStart="276dp"
+        android:layout_marginBottom="3dp"
         android:text="Finaliza"
-        android:textColor="@color/common_google_signin_btn_text_light_default" />
+        android:textColor="@android:color/darker_gray"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/nombre_evento"
@@ -99,11 +115,12 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="160dp"
+        android:background="@color/common_google_signin_btn_text_light_default"
         android:paddingLeft="10dp"
-        android:paddingTop="5dp"
         android:text="Nombre del Evento"
         android:textAlignment="textStart"
         android:textColor="#ffffff"
+        android:textSize="18sp"
         android:textStyle="bold"
         tools:background="@color/common_google_signin_btn_text_light_default" />
 

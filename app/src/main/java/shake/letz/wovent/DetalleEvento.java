@@ -83,6 +83,8 @@ public class DetalleEvento extends AppCompatActivity {
                 }
             }
 
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
