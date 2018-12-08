@@ -31,8 +31,9 @@
                 android:layout_gravity="end"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="10dp"
-                android:background="@color/colorAccent"
+                android:background="@drawable/button_shape"
                 android:drawable="@drawable/button_shape"
+                android:fontFamily="@font/open_sans"
                 android:gravity="center"
                 android:text="Subir Imagen"
                 android:textAllCaps="false"
@@ -49,18 +50,17 @@
         </android.support.v7.widget.CardView>
 
 
-
-
         <EditText
             android:id="@+id/et_nombre_actividad"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:background="@drawable/shape_editbox_gray"
+            android:fontFamily="@font/open_sans"
+            android:hint="Nombre de la Actividad"
             android:paddingLeft="20dp"
             android:paddingTop="10dp"
             android:paddingRight="10dp"
-            android:hint="Nombre de la Actividad"
             android:paddingBottom="10dp" />
 
         <EditText
@@ -70,6 +70,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/shape_editbox_gray"
+            android:fontFamily="@font/open_sans"
             android:hint="Descripción de la Actividad"
             android:inputType=""
             android:paddingLeft="20dp"
@@ -84,6 +85,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:background="@drawable/shape_editbox_gray"
+            android:fontFamily="@font/open_sans"
             android:hint="Horario (Ej: 11:30 - 13:00)"
             android:inputType=""
             android:paddingLeft="20dp"
@@ -99,10 +101,12 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="14dp"
-            android:background="@color/colorAccent"
+            android:background="@drawable/button_shapepink"
+            android:fontFamily="@font/open_sans"
             android:text="Agregar Actividad"
             android:textAllCaps="false"
-            android:textColor="#FFFF" />
+            android:textColor="#FFFF"
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btn_volver_actividad"
@@ -112,10 +116,12 @@
             android:layout_centerHorizontal="true"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="14dp"
-            android:background="@color/colorAccent"
+            android:background="@drawable/button_shape"
+            android:fontFamily="@font/open_sans"
             android:text="Volver"
             android:textAllCaps="false"
-            android:textColor="#FFFF" />
+            android:textColor="#FFFF"
+            android:textStyle="bold" />
 
         <android.support.design.widget.BottomNavigationView
             android:id="@+id/navigation"

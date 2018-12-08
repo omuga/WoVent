@@ -12,6 +12,10 @@
         android:id="@+id/image_event"
         android:layout_width="match_parent"
         android:layout_height="190dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
         android:background="@color/common_google_signin_btn_text_light_default"
         android:scaleType="centerCrop"
         tools:srcCompat="@tools:sample/backgrounds/scenic[15]" />
@@ -38,6 +42,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="50dp"
         android:background="@color/colorPrimaryDark"
+        android:fontFamily="@font/open_sans"
         android:paddingTop="5dp"
         android:text="El evento este año será en Santiago, los esperamos!"
         android:textAlignment="center"
@@ -63,6 +68,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="190dp"
+        android:fontFamily="@font/open_sans"
         android:paddingTop="5dp"
         android:text="20/04/2019"
         android:textAlignment="center"
@@ -77,6 +83,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="200dp"
         android:layout_marginTop="190dp"
+        android:fontFamily="@font/open_sans"
         android:paddingTop="5dp"
         android:text="20/04/2019"
         android:textAlignment="center"
@@ -91,9 +98,9 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="81dp"
         android:layout_marginBottom="2dp"
+        android:fontFamily="@font/open_sans"
         android:text="Inicia"
-        android:textColor="@android:color/darker_gray"
-        android:textStyle="bold" />
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     <TextView
         android:id="@+id/fin"
@@ -103,9 +110,9 @@
         android:layout_alignParentStart="true"
         android:layout_marginStart="276dp"
         android:layout_marginBottom="3dp"
+        android:fontFamily="@font/open_sans"
         android:text="Finaliza"
-        android:textColor="@android:color/darker_gray"
-        android:textStyle="bold" />
+        android:textColor="@color/common_google_signin_btn_text_dark_default" />
 
     <TextView
         android:id="@+id/nombre_evento"
@@ -116,6 +123,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="160dp"
         android:background="@color/common_google_signin_btn_text_light_default"
+        android:fontFamily="@font/open_sans"
         android:paddingLeft="10dp"
         android:text="Nombre del Evento"
         android:textAlignment="textStart"
@@ -134,5 +142,17 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="0dp"
         tools:listitem="@layout/fragment_lista_programa"></android.support.v7.widget.RecyclerView>
+
+    <ImageButton
+        android:id="@+id/imageButton"
+        android:layout_width="49dp"
+        android:layout_height="48dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="9dp"
+        android:layout_toEndOf="@+id/fin"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        android:src="@drawable/ic_heart_event" />
 
 </RelativeLayout>
