@@ -76,7 +76,7 @@ public class AgregarActividadActivity extends Activity {
             public void onClick(View v) {
                 Actividad actividad = new Actividad(nombre_actividad.getText().toString(),
                         descripcion_actividad.getText().toString(),
-                        horario_actividad.getText().toString(),email_creador,nombre_evento,downloadUri+"");
+                        horario_actividad.getText().toString(),"21/12/2018",email_creador,nombre_evento,downloadUri+"");
                 actividadRef.push().setValue(actividad);
                 Toast.makeText(getApplicationContext(), "Actividad Creada Satisfactoriamente", Toast.LENGTH_SHORT).show();
                 nombre_actividad.setText("");
