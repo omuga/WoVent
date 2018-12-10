@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        Fragment fragment = new EventosFragment();
+        Fragment fragment = new InicioSesionFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.Contenedor, fragment).commit();
         navigationView.getMenu().getItem(0).setChecked(true);
     }
@@ -94,11 +94,8 @@ public class MainActivity extends AppCompatActivity
         Fragment fragment = null;
         Boolean FragmentSeleccionado = false;
 
-        if (id == R.id.lista_eventos) {
-            fragment = new EventosFragment();
-            getSupportFragmentManager().beginTransaction().replace(R.id.Contenedor, fragment);
-            FragmentSeleccionado = true;
-        } else if (id == R.id.iniciar_sesion) {
+
+        if (id == R.id.iniciar_sesion) {
             fragment = new InicioSesionFragment();
             getSupportFragmentManager().beginTransaction().replace(R.id.Contenedor,fragment);
             FragmentSeleccionado = true;

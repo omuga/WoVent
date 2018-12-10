@@ -35,7 +35,10 @@
             android:label="@string/title_activity_editar_evento" />
         <activity
             android:name=".NotificacionActivity"
-            android:label="@string/title_activity_notificacion"></activity>
+            android:label="@string/title_activity_notificacion" />
+        <activity
+            android:name=".UserProfileNav"
+            android:label="@string/title_activity_user_profile_nav"></activity>
     </application>
 
 </manifest>
