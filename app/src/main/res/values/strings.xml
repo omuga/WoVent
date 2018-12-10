@@ -16,4 +16,10 @@
     <string name="title_activity_agregar_actividad">AgregarActividadActivity</string>
     <string name="title_activity_editar_evento">EditarEventoActivity</string>
     <string name="title_activity_notificacion">NotificacionActivity</string>
+    <string name="title_activity_user_profile_nav">UserProfileNav</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+
+    <string name="action_example">Example action</string>
 </resources>
