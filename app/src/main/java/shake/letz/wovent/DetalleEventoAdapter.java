@@ -26,6 +26,8 @@ public class DetalleEventoAdapter extends  RecyclerView.Adapter<DetalleEventoAda
     public void onBindViewHolder(ActividadHolder actividadHolder, int position) {
         Actividad actividad = actividades.get(position);
         actividadHolder.textViewActividad.setText(actividad.getNombre());
+        actividadHolder.textViewDescActividad.setText(actividad.getDescripcion());
+        actividadHolder.textViewHora.setText(actividad.getHorario());
     }
 
     @Override
@@ -35,11 +37,15 @@ public class DetalleEventoAdapter extends  RecyclerView.Adapter<DetalleEventoAda
 
     public class ActividadHolder extends  RecyclerView.ViewHolder {
         TextView textViewActividad;
+        TextView textViewDescActividad;
+        TextView textViewHora;
 
         public ActividadHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewActividad = (TextView) itemView.findViewById(R.id.line_up);
+            textViewDescActividad = (TextView) itemView.findViewById(R.id.desc_actividad);
+            textViewHora = (TextView) itemView.findViewById(R.id.hora_actividad);
 
         }
     }

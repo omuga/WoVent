@@ -4,6 +4,7 @@ public class Actividad {
     String nombre;
     String descripcion;
     String horario;
+    String fecha;
     String email;
     String evento;
     String uri;
@@ -12,10 +13,11 @@ public class Actividad {
     public  Actividad(){
     }
 
-    public  Actividad(String nombre, String descripcion, String horario, String email, String evento,String uri){
+    public  Actividad(String nombre, String descripcion, String horario, String fecha, String email, String evento,String uri){
             this.nombre = nombre;
             this.descripcion= descripcion;
             this.horario = horario;
+            this.fecha = fecha;
             this.email = email;
             this.evento = evento;
             this.uri = uri;
@@ -43,6 +45,14 @@ public class Actividad {
 
     public String getHorario() {
         return horario;
+    }
+
+    public void setFecha(String fecha) {
+        this.fecha = fecha;
+    }
+
+    public String getFecha() {
+        return fecha;
     }
 
     public void setEmail(String email) {

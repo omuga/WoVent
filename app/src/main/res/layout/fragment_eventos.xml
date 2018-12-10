@@ -28,6 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentTop="false"
             android:layout_marginTop="15dp"
+            android:fontFamily="@font/open_sans"
             android:text="Nombre Tienda"
             android:textColor="#9b8cad"
             android:textSize="18sp"
@@ -41,9 +42,10 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/t_name"
             android:layout_alignLeft="@+id/t_name"
+            android:fontFamily="@font/open_sans"
             android:text="Estado"
-            android:textSize="18sp"
             android:textColor="#008577"
+            android:textSize="18sp"
             tools:layout_editor_absoluteX="173dp"
             tools:layout_editor_absoluteY="74dp" />
     </LinearLayout>

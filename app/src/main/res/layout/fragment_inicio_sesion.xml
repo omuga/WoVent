@@ -39,6 +39,7 @@
                 android:background="@drawable/shape_editbox"
                 android:drawableLeft="@drawable/ic_email_black_24dp"
                 android:drawablePadding="15dp"
+                android:fontFamily="@font/open_sans"
                 android:hint="Ingresa tu Email"
                 android:inputType="textEmailAddress"
                 android:padding="15dp"
@@ -56,10 +57,11 @@
                 android:layout_marginBottom="5dp"
                 android:background="@drawable/shape_editbox"
                 android:drawableLeft="@drawable/ic_lock_black_24dp"
+                android:drawablePadding="5dp"
+                android:fontFamily="@font/open_sans"
                 android:hint="Ingresa tu Contraseña"
                 android:inputType="textPassword"
                 android:padding="15dp"
-                android:drawablePadding="5dp"
                 android:textColor="#FFFF"
                 android:textColorHighlight="#FFFF"
                 android:textColorHint="#FFFF" />
@@ -73,11 +75,13 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginBottom="10dp"
                 android:background="@drawable/button_selector"
+                android:fontFamily="@font/open_sans"
+                android:padding="15dp"
                 android:text="Iniciar Sesión"
                 android:textAllCaps="false"
                 android:textColor="#FFFF"
-                android:padding="15dp"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/link_signup"

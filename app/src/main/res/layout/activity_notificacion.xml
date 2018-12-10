@@ -11,25 +11,26 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Escriba su notificación"
         android:background="@drawable/shape_editbox_gray"
+        android:fontFamily="@font/open_sans"
+        android:hint="Escriba su notificación"
         android:paddingLeft="20dp"
         android:paddingTop="10dp"
         android:paddingRight="10dp"
-        android:paddingBottom="10dp"
-        />
+        android:paddingBottom="10dp" />
 
     <Button
         android:id="@+id/btn_enviar_notificacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="175dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="14dp"
         android:background="@drawable/button_selector"
+        android:fontFamily="@font/open_sans"
         android:text="Enviar"
         android:textAllCaps="false"
-        android:textColor="#FFFF"
-        android:layout_marginTop="10dp"/>
+        android:textColor="#FFFF" />
 
 
 
