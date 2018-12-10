@@ -14,7 +14,8 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-public class UserProfileActivity extends AppCompatActivity implements  AgregarEventoFragment.OnFragmentInteractionListener, ListaEventosFragment.OnFragmentInteractionListener {
+public class UserProfileActivity extends AppCompatActivity implements  AgregarEventoFragment.OnFragmentInteractionListener,
+        ListaEventosFragment.OnFragmentInteractionListener, EventosFragment.OnFragmentInteractionListener{
 
     private TextView mTextMessage;
 
@@ -25,6 +26,10 @@ public class UserProfileActivity extends AppCompatActivity implements  AgregarEv
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             Fragment fragment;
             switch (item.getItemId()) {
+                case R.id.lista_eventos:
+                    fragment = new EventosFragment();
+                    loadFragment((fragment));
+                    return true;
                 case R.id.navigation_home:
                     fragment = new AgregarEventoFragment();
                     loadFragment(fragment);
