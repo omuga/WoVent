@@ -23,25 +23,46 @@
             android:textAllCaps="true"
             android:textStyle="bold" />
 
-        <Switch
+        <TextView
             android:id="@+id/line_up"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:fontFamily="@font/open_sans"
-            android:text="Switch"
-            android:textAllCaps="false" />
+            android:text="TextView"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/notificaciones"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:checked="true" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/desc_actividad"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="76dp"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_weight="1"
-        android:fontFamily="@font/open_sans"
-        android:text="TextView"
-        android:textAlignment="textStart" />
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/id_act"
+            android:layout_width="67dp"
+            android:layout_height="19dp"
+            android:layout_weight="0"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/desc_actividad"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:fontFamily="@font/open_sans"
+            android:text="TextView"
+            android:textAlignment="textStart" />
+    </LinearLayout>
 
 </LinearLayout>

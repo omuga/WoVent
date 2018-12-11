@@ -7,19 +7,21 @@ public class Actividad {
     String fecha;
     String email;
     String evento;
+    Integer id;
     String uri;
 
 
     public  Actividad(){
     }
 
-    public  Actividad(String nombre, String descripcion, String horario, String fecha, String email, String evento,String uri){
+    public  Actividad(String nombre, String descripcion, String horario, String fecha, String email, String evento, Integer id, String uri){
             this.nombre = nombre;
             this.descripcion= descripcion;
             this.horario = horario;
             this.fecha = fecha;
             this.email = email;
             this.evento = evento;
+            this.id = id;
             this.uri = uri;
     }
 
@@ -71,7 +73,11 @@ public class Actividad {
         return  evento;
     }
 
-    public void setUri(String uri){this.uri = uri;}
+    public Integer getId() { return id;}
+
+    public void setId(Integer id) { this.id = id;}
+
+    public void setUri(String uri){ this.uri = uri;}
 
     public String getUri() {
         return uri;
