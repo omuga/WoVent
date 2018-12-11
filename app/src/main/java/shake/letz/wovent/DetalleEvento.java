@@ -77,17 +77,14 @@ public class DetalleEvento extends AppCompatActivity {
         rv = findViewById(R.id.recycler_actividades);
         adapter = new DetalleEventoAdapter(actividades);
         mDatabase = FirebaseDatabase.getInstance().getReference("Actividad");
-        //id_act = mDatabase.child("idauto").toString();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChildren()){
                     for (DataSnapshot ds: dataSnapshot.getChildren()){
-                        Log.d("MMMM",ds.getValue().toString());
                         if (!ds.getKey().equals("idauto")){
                             final Actividad act = ds.getValue(Actividad.class);
                             if(act.getEvento().equals(keynombre)){
-                                Log.d("DetalleEvento",act.getNombre());
                                 actividades.add(act);
                         }
                         }
@@ -104,32 +101,8 @@ public class DetalleEvento extends AppCompatActivity {
             }
         });
 
-        adapter.setOnItemClickListener(new DetalleEventoAdapter.ClickListener() {
-            @Override
-            public void onItemClick(int position, View v) {
-               Log.d("Click", "onItemClick position: " + position);
-            }
-        });
 
-        /*
-        Button btn_save = (Button) findViewById(R.id.save_btn);
-        btn_save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                saveData();
-            }
-        });*/
     }
 
-    /*private void saveData(){
-        SharedPreferences sharedPreferences = getSharedPreferences("shared prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        //Gson gson = new Gson();
-        //String json = gson.toJson(mDatabase);
-        //editor.putString("actividades", json);
-        HashSet<String> dataset = new HashSet<>();
-        //dataset.add();
-        editor.apply();
 
-    }*/
 }

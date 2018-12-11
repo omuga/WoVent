@@ -15,7 +15,6 @@ import Objetos.Actividad;
 
 public class DetalleEventoAdapter extends  RecyclerView.Adapter<DetalleEventoAdapter.ActividadHolder> {
 
-    private static ClickListener clickListener;
     //private ClickListener clickListener;
     List<Actividad> actividades;
 
@@ -28,14 +27,14 @@ public class DetalleEventoAdapter extends  RecyclerView.Adapter<DetalleEventoAda
         return holder;
     }
 
-    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(ActividadHolder actividadHolder, int position) {
         Actividad actividad = actividades.get(position);
+        String SId = actividad.getId().toString();
         actividadHolder.textViewActividad.setText(actividad.getNombre());
         actividadHolder.textViewDescActividad.setText(actividad.getDescripcion());
         actividadHolder.textViewHora.setText(actividad.getHorario());
-        actividadHolder.textViewId.setText(actividad.getId().toString());
+        actividadHolder.textViewId.setText(SId);
     }
 
     @Override
@@ -45,13 +44,12 @@ public class DetalleEventoAdapter extends  RecyclerView.Adapter<DetalleEventoAda
 
 
 
-    public class ActividadHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ActividadHolder extends  RecyclerView.ViewHolder {
         TextView textViewActividad;
         TextView textViewDescActividad;
         TextView textViewHora;
         TextView textViewId;
         CheckBox checkBoxEvent;
-        ClickListener clickListener;
 
 
         public ActividadHolder(@NonNull View itemView) {
@@ -63,23 +61,9 @@ public class DetalleEventoAdapter extends  RecyclerView.Adapter<DetalleEventoAda
             textViewId = (TextView) itemView.findViewById(R.id.id_act);
             checkBoxEvent = (CheckBox) itemView.findViewById(R.id.notificaciones);
 
-            itemView.setOnClickListener(this);
-
         }
 
-        @Override
-        public void onClick(View v) {
-            clickListener.onItemClick(getAdapterPosition(), v);
-        }
 
     }
-
-    public void setOnItemClickListener(ClickListener clickListener) {
-        DetalleEventoAdapter.clickListener = clickListener;
-    }
-    public interface ClickListener {
-        void onItemClick(int position, View v);
-    }
-
 
 }
