@@ -19,17 +19,13 @@ import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import Objetos.Actividad;
-import Objetos.myCallBack;
 
 public class AgregarActividadActivity extends Activity {
 
@@ -55,9 +51,6 @@ public class AgregarActividadActivity extends Activity {
         super.onCreate(savedInstanceState);
         database = FirebaseDatabase.getInstance();
         actividadRef = database.getReference("Actividad");
-
-        //id_act = Integer.valueOf(actividadRef.child("idauto").toString());
-
         setContentView(R.layout.activity_agregar_actividad);
         mImageView = findViewById(R.id.fimg);
         nombre_actividad = findViewById(R.id.et_nombre_actividad);
@@ -81,22 +74,15 @@ public class AgregarActividadActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                readDataActividad(new myCallBack() {
-                    @Override
-                    public void onCallback(int value) {
-                        actividadRef.child("idauto").setValue(value+1);
-                        Actividad actividad = new Actividad(nombre_actividad.getText().toString(),
-                                descripcion_actividad.getText().toString(),
-                                horario_actividad.getText().toString(),"21/12/2018",email_creador,nombre_evento,value+1,downloadUri+"");
-                        actividadRef.push().setValue(actividad);
-                        Toast.makeText(getApplicationContext(), "Actividad Creada Satisfactoriamente", Toast.LENGTH_SHORT).show();
-                        nombre_actividad.setText("");
-                        descripcion_actividad.setText("");
-                        horario_actividad.setText("");
-                        mImageView.setImageResource(R.drawable.ic_menu_camera);
-                    }
-                });
-
+                Actividad actividad = new Actividad(nombre_actividad.getText().toString(),
+                        descripcion_actividad.getText().toString(),
+                        horario_actividad.getText().toString(),"21/12/2018",email_creador,nombre_evento,downloadUri+"");
+                actividadRef.push().setValue(actividad);
+                Toast.makeText(getApplicationContext(), "Actividad Creada Satisfactoriamente", Toast.LENGTH_SHORT).show();
+                nombre_actividad.setText("");
+                descripcion_actividad.setText("");
+                horario_actividad.setText("");
+                mImageView.setImageResource(R.drawable.ic_menu_camera);
             }
         });
         button_volver = findViewById(R.id.btn_volver_actividad);
@@ -144,19 +130,5 @@ public class AgregarActividadActivity extends Activity {
                 }
             });
         }
-    }
-
-    public void readDataActividad(final myCallBack myCallback){
-        actividadRef.child("idauto").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                int value = dataSnapshot.getValue(Integer.class);
-                myCallback.onCallback(value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
-
     }
 }

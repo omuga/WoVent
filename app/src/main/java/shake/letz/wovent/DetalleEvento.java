@@ -2,15 +2,12 @@ package shake.letz.wovent;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,10 +17,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 
 import Objetos.Actividad;
@@ -35,17 +30,11 @@ public class DetalleEvento extends AppCompatActivity {
     private TextView fechaeEvento;
     private TextView descEvento;
     private DatabaseReference mDatabase;
-    private Button SaveBtn;
     Context context = this;
 
     RecyclerView rv;
     public ArrayList<Actividad> actividades;
     DetalleEventoAdapter adapter;
-    String id_act;
-
-    private SharedPreferences mySP;
-    private HashSet<Boolean> act_notificacion;
-    private Gson gson;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,11 +71,10 @@ public class DetalleEvento extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if(dataSnapshot.hasChildren()){
                     for (DataSnapshot ds: dataSnapshot.getChildren()){
-                        if (!ds.getKey().equals("idauto")){
-                            final Actividad act = ds.getValue(Actividad.class);
-                            if(act.getEvento().equals(keynombre)){
-                                actividades.add(act);
-                        }
+                        final Actividad act = ds.getValue(Actividad.class);
+                        if(act.getEvento().equals(keynombre)){
+                            Log.d("DetalleEvento",act.getNombre());
+                            actividades.add(act);
                         }
                     }
                     rv.setAdapter(adapter);
@@ -95,14 +83,12 @@ public class DetalleEvento extends AppCompatActivity {
                 }
             }
 
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
-
-
     }
-
-
 }
