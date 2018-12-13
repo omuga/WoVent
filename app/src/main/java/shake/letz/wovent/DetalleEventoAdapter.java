@@ -18,7 +18,6 @@ public class DetalleEventoAdapter extends  RecyclerView.Adapter<DetalleEventoAda
     //private ClickListener clickListener;
     List<Actividad> actividades;
 
-
     public DetalleEventoAdapter(List<Actividad> actividades) {this.actividades = actividades;}
 
     public ActividadHolder onCreateViewHolder(ViewGroup parent, int i) {
@@ -41,6 +40,7 @@ public class DetalleEventoAdapter extends  RecyclerView.Adapter<DetalleEventoAda
     public int getItemCount() {
         return actividades.size();
     }
+
 
 
 
